@@ -28,7 +28,11 @@ $(document).ready(function () {
               if (results[i].rating !== "r" && results[i].rating !== "pg-13") {
                 var gifDiv = $("<div>");
                 var sportImage = $("<img>");
-                sportImage.attr("src", results[i].images.fixed_height.url);
+                sportImage.attr("src", results[i].images.fixed_height_still.url);
+                sportImage.attr("data-still", results[i].images.fixed_height_still.url);
+                sportImage.attr("data-animate", results[i].images.fixed_height.url);
+                sportImage.attr("data-state", "still");
+                sportImage.attr("class", "gif");
 
                 gifDiv.append(sportImage);
                 $("#gifs").prepend(gifDiv);
@@ -48,9 +52,20 @@ $(document).ready(function () {
 
     });
 
-   
+    $(document).on("click", ".gif", function() {
+        var state = $(this).attr("data-state");
+        var animate = $(this).attr("data-animate");
+        var still = $(this).attr("data-still");
 
+        if(state == "still") {
+            $(this).attr("src", animate);
+            $(this).attr("data-state", "animate");
+        }
 
+        else if(state == "animate") {
+            $(this).attr("src", still);
+            $(this).attr("data-state", "still");
+        } 
+    });
 
-
-        });
+});
