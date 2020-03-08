@@ -34,6 +34,10 @@ $(document).ready(function () {
                 sportImage.attr("data-state", "still");
                 sportImage.attr("class", "gif");
 
+                var rating = response.data[i].rating;
+                var p = $("<p>").text("Rating: " + rating);
+
+                gifDiv.append(p);
                 gifDiv.append(sportImage);
                 $("#gifs").prepend(gifDiv);
               }
